@@ -1,0 +1,8 @@
+.containerSubtitle {
+    display: flex;
+    justify-content: space-around;
+    font-size: 12;
+    font-family: RickandMorty;
+    text-shadow: 5px 5px 5px black;
+    color: white;
+}

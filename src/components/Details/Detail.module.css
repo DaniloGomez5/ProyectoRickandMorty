@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 0, 255, 0.5);
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: 5px 5px 5px #00C957;
+}
+.left{
+    flex: 0 0 auto;
+}
+
+.right{
+    flex: 0 0 auto;
+    font-family: Rick2;
+    font-size: larger;
+    color: white;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 20px;
+    text-decoration: overline;
+}
