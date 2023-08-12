@@ -34,7 +34,8 @@ export default function SearchBar({onSearch}) {
                backgroundColor: '#ffffffd7',
                border:'5px black',
                boxShadow: '5px 5px 5px 0px #00C957',
-               cursor: 'pointer'
+               cursor: 'pointer',
+               fontFamily: 'Rick2'
             }}
             onClick={() => onSearch(id)}
          >

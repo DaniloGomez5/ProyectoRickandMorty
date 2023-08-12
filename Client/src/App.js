@@ -6,15 +6,14 @@ import About from "./components/About/About";
 import Details from "./components/Details/Detail";
 import Form from "./components/Form/Form";
 import axios from "axios";
-import { Routes, Route, useNavigate, Await } from "react-router-dom";
+import { Routes, Route, useNavigate, Await, useLocation } from "react-router-dom";
 import Favorites from "./components/Favoritos/Favorites";
 
 function App() {
+  const location = useLocation();
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
-  const EMAIL = "danilog992@gmail.com";
-  const PASSWORD = "aldopedro2";
 
   async function login(userData) {
     try {
@@ -38,6 +37,7 @@ function App() {
   useEffect(() => {
     !access && navigate("/");
   }, [access, navigate]);
+
 
   const onSearch = async (id) => {
     const repeated = characters.find((item) => item.id === Number(id));
@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <Nav onSearch={onSearch} />
+      {location.pathname !== '/' && <Nav onSearch={onSearch} />}
       <Routes>
         <Route path="/" element={<Form login={login} />} />
         <Route

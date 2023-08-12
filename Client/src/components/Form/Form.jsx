@@ -1,57 +1,71 @@
-import React, { useState } from "react";
-import FormStyle from './FormStyle.css'
+import { useState } from "react";
+import validation from "./Validation";
+import styles from "./Form.module.css";
 
 
-function Form ({login}) {
+export default function Form({ login }) {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
 
-    const [userData, setUserData] = useState({
-        email: '',
-        password: ''
-    })
-    
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setUserData((prevUserdata)=>({
-            ...prevUserdata,
-            [name]: value
-        }))
-    }
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        login(userData)
-    }
+  const handleInputChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+    setErrors(
+      validation({
+        ...userData,
+        [e.target.name]: e.target.value,
+      })
+    );
+  };
 
-    const [errors, setErrors] = useState({});
-    
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(userData);
+  };
 
-    return(
-        <div className="container">
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <form className={styles.container} onSubmit={handleSubmit}>
+        <label>Email</label>
+        <input
+          type="text"
+          name="email"
+          value={userData.email}
+          onChange={handleInputChange}
+          className={`${styles.inputEmail} ${errors.email ? styles.warning : ''}`}
+        />
+        <p className="danger">{errors.email}</p>
 
-           <label className="Label">Email</label>
-           <input className="inputEmail" 
-                name="email" 
-                type="text" 
-                placeholder="Introduzca su Email"
-                value={userData.email}
-                onChange={handleChange}
-           />
-           {errors.email && <p>{errors.email}</p>}
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          value={userData.password}
+          onChange={handleInputChange}
+          className={styles.inputPassword}
+        />
+        <p className="danger">{errors.password}</p>
 
-           <label className="Label">Password</label>
-           <input className="inputPassword"
-                name="password" 
-                type="password"    
-                placeholder="Introduzca su contraseña"
-                value={userData.password}
-                onChange={handleChange}
-            />
-            {errors.password && <p>{errors.password}</p>}
-           
-           <button className="Boton" name="submit" type="submit" onClick={handleSubmit}>Submit</button>
-
-        </div>
-    )
+        <button className={styles.boton} type="submit" onClick={handleSubmit}>
+          SUBMIT
+        </button>
+      </form>
+    </div>
+  );
 }
 
-export default Form

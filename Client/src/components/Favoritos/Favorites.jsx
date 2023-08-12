@@ -18,19 +18,48 @@ export function Favorites({ myFavorites }) {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
       <div>
-        <select onChange={handleOrder}>
+        <select
+          onChange={handleOrder}
+          style={{
+            display: "flex",
+            position: "relative",
+            padding: "5px",
+            margin: "5px",
+            boxShadow: "3px 3px 3px 0px #00C957",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontFamily: "Rick2",
+          }}
+        >
           <option value="A">Ascendente</option>
           <option value="D">Descendente</option>
         </select>
-        <select onChange={handleFilter}>
+        <select
+          onChange={handleFilter}
+          style={{
+            display: "flex",
+            position: "relative",
+            padding: "5px",
+            margin: "5px",
+            boxShadow: "3px 3px 3px 0px #00C957",
+            borderRadius: "5px",
+            cursor: "pointer",
+            fontFamily: "Rick2",
+          }}
+        >
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Genderless">Genderless</option>
           <option value="unknown">Unknown</option>
         </select>
       </div>
+
       {myFavorites.map((characters) => {
         return (
           <Card
