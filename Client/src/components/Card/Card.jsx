@@ -6,7 +6,7 @@ import styleModule from './styles.module.css';
 import React, { useState, useEffect } from 'react';
 import {addFav, removeFav } from '../../redux/Actions'
 import { connect } from 'react-redux';
-import Favorites from '../Favoritos/Favorites';
+
 
 
 
@@ -18,33 +18,37 @@ const OriginItem = style.div`
    padding-bottom: 20px;
 `
 
-function Card(props) {
+export function Card({id, image, name, species, gender, origin, onClose, removeFav, addFav, myFavorites,}) {
    
    const [isHovered, setIsHovered] = useState(false);
-   
-   const {id, image, name, species, gender, origin, onClose, removeFav, addFav, myFavorites,} = props
 
    const [isFav, setIsFav] = useState(false)
 
    useEffect(() => {
-      if (myFavorites && Array.isArray(myFavorites)) {
         myFavorites.forEach((fav) => {
           if (fav.id === id) {
             setIsFav(true);
           }
         });
-      }
-   }, [myFavorites, id]);
+      }, [myFavorites, id]);
     
    
    const handleFavorite = () => {
+      let character = {
+         id,
+         name,
+         origin,
+         image,
+         gender,
+         species
+      }
       if(isFav){
-         removeFav(id)
          setIsFav(false)
+         removeFav(id)
       }
       else {
-         addFav(id)
          setIsFav(true)
+         addFav(character)
       }
    }
 
@@ -96,17 +100,22 @@ function Card(props) {
    );
 }
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
    return {
       myFavorites: state.myFavorites
    }
 
 }
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
    return {
-      addFav: (characters) => dispatch(addFav(characters)),
-      removeFav: (id) => dispatch(removeFav(id))
+      addFav: (character) => {
+         dispatch(addFav(character))
+      },
+      
+      removeFav: (id) => {
+         dispatch(removeFav(id))
+      }
    }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Card);
