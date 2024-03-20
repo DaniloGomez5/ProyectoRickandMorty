@@ -9,11 +9,16 @@ function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_FAV:
       return { ...state, myFavorites: payload, allCharacters: payload };
+<<<<<<< HEAD
       case REMOVE_FAV:
         return {
           ...state,
           myFavorites: state.myFavorites.filter((fav) => fav.id !== payload), // Cambia payload.id a payload
         };
+=======
+    case REMOVE_FAV:
+      return { ...state, myFavorites: payload, allCharacters: payload };
+>>>>>>> fc5ea8da16a22fbd40800ca31572d042e7e1e393
     case FILTER:
       let copy2 = [...state.allCharacters];
       let genderFilter = copy2.filter((character) => {

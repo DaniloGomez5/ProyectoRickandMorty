@@ -1,3 +1,2 @@
-usuario para el login: danilog992@gmail.com / aldopedro2
-
-Falta pulir algunas cosas como los errores en el form y lo ultimo que es el tema de favoritos, no pude resolverlo ya que era hacer esto o centrarme en el checkpoint disculpen los inconvenientes. 
+usuario para el login: danilog992@gmail.com / aldopedro2000
+ 

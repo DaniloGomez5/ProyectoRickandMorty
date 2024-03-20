@@ -6,6 +6,7 @@ import About from "./components/About/About";
 import Details from "./components/Details/Detail";
 import Form from "./components/Form/Form";
 import axios from "axios";
+<<<<<<< HEAD
 import { Routes, Route, useNavigate, Await } from "react-router-dom";
 import Favorites from "./components/Favoritos/Favorites";
 
@@ -15,6 +16,16 @@ function App() {
   const [access, setAccess] = useState(false);
   const EMAIL = "danilog992@gmail.com";
   const PASSWORD = "aldopedro2";
+=======
+import { Routes, Route, useNavigate, Await, useLocation } from "react-router-dom";
+import Favorites from "./components/Favoritos/Favorites";
+
+function App() {
+  const location = useLocation();
+  const [characters, setCharacters] = useState([]);
+  const navigate = useNavigate();
+  const [access, setAccess] = useState(false);
+>>>>>>> fc5ea8da16a22fbd40800ca31572d042e7e1e393
 
   async function login(userData) {
     try {
@@ -39,6 +50,10 @@ function App() {
     !access && navigate("/");
   }, [access, navigate]);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fc5ea8da16a22fbd40800ca31572d042e7e1e393
   const onSearch = async (id) => {
     const repeated = characters.find((item) => item.id === Number(id));
     if (repeated) {
@@ -69,7 +84,11 @@ function App() {
 
   return (
     <div className="App">
+<<<<<<< HEAD
       <Nav onSearch={onSearch} />
+=======
+      {location.pathname !== '/' && <Nav onSearch={onSearch} />}
+>>>>>>> fc5ea8da16a22fbd40800ca31572d042e7e1e393
       <Routes>
         <Route path="/" element={<Form login={login} />} />
         <Route
