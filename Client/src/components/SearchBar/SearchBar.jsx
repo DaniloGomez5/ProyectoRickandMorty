@@ -5,6 +5,11 @@ export default function SearchBar({onSearch}) {
    const handleOnChange = (e) => {
       setId(e.target.value);
    }
+
+   const handleSearch = () => {
+      onSearch(id);
+      setId('');
+   }
    
    return (
       <div
@@ -26,6 +31,7 @@ export default function SearchBar({onSearch}) {
                boxShadow: '5px 5px 5px 0px #00C957'
             }}
             onChange={handleOnChange}
+            value={id}
          />
          <button 
             style={{
@@ -36,7 +42,7 @@ export default function SearchBar({onSearch}) {
                boxShadow: '5px 5px 5px 0px #00C957',
                cursor: 'pointer'
             }}
-            onClick={() => onSearch(id)}
+            onClick={handleSearch}
          >
             Buscar
          </button>

@@ -1,20 +1,18 @@
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import Card from "../Card/Card";
 import { filterCards, orderCards } from "../../redux/Actions";
 import { useState } from "react";
 
-export function Favorites({ myFavorites }) {
-  const dispatch = useDispatch();
-
+export function Favorites({ myFavorites, orderCards, filterCards }) {
   const [aux, setAux] = useState(false);
 
   const handleOrder = (e) => {
-    dispatch(orderCards(e.target.value));
+    orderCards(e.target.value);
     setAux(!aux);
   };
 
   const handleFilter = (e) => {
-    dispatch(filterCards(e.target.value));
+    filterCards(e.target.value);
   };
 
   return (
@@ -55,4 +53,11 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Favorites);
+function mapDispatchToProps(dispatch) {
+  return {
+    orderCards: (value) => dispatch(orderCards(value)),
+    filterCards: (value) => dispatch(filterCards(value)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Favorites);

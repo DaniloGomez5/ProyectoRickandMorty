@@ -1,11 +1,5 @@
 import { ADD_FAV, REMOVE_FAV, FILTER, ORDER } from "./Types";
 import axios from "axios";
-/* const addFav = (character) => {
-  return {
-    type: ADD_FAV,
-    payload: character,
-  };
-}; */
 
 const addFav = (character) => {
   const endpoint = "http://localhost:3001/rickandmorty/fav";
@@ -16,25 +10,27 @@ const addFav = (character) => {
         type: ADD_FAV,
         payload: data,
       });
-    } catch (error) {}
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        console.error('Character is already a favorite');
+      } else {
+        console.error(error);
+      }
+    }
   };
 };
 
-/* const removeFav = (id) => {
-  return {
-    type: REMOVE_FAV,
-    payload: id,
-  };
-}; */
 
 const removeFav = (id) => {
   const endpoint = "http://localhost:3001/rickandmorty/fav/" + id;
+  console.log(`ID a eliminar: ${id}`);
+  console.log(`Endpoint: ${endpoint}`);
   return async (dispatch) => {
     try {
-      const { data } = await axios.delete(endpoint);
+      await axios.delete(endpoint);
       return dispatch({
         type: REMOVE_FAV,
-        payload: data,
+        payload: id,
       });
     } catch (error) {
       console.error("Error al eliminar de favoritos:", error);

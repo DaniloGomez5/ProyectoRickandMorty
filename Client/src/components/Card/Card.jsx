@@ -3,12 +3,9 @@ import style from 'styled-components';
 import { styleJs } from './styles';
 import './styles.css';
 import styleModule from './styles.module.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {addFav, removeFav } from '../../redux/Actions'
 import { connect } from 'react-redux';
-
-
-
 
 const OriginItem = style.div`
    color: white;
@@ -22,17 +19,8 @@ export function Card({id, image, name, species, gender, origin, onClose, removeF
    
    const [isHovered, setIsHovered] = useState(false);
 
-   const [isFav, setIsFav] = useState(false)
+   const isFav = myFavorites.some(fav => fav.id === id);
 
-   useEffect(() => {
-        myFavorites.forEach((fav) => {
-          if (fav.id === id) {
-            setIsFav(true);
-          }
-        });
-      }, [myFavorites, id]);
-    
-   
    const handleFavorite = () => {
       let character = {
          id,
@@ -43,11 +31,9 @@ export function Card({id, image, name, species, gender, origin, onClose, removeF
          species
       }
       if(isFav){
-         setIsFav(false)
          removeFav(id)
       }
       else {
-         setIsFav(true)
          addFav(character)
       }
    }
@@ -119,4 +105,3 @@ export const mapDispatchToProps = (dispatch) => {
    }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Card);
-

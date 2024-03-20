@@ -7,25 +7,13 @@ const initialState = {
 
 function rootReducer(state = initialState, { type, payload }) {
   switch (type) {
-    /* case ADD_FAV:
-      return {
-        ...state,
-        myFavorites: [...state.myFavorites, payload],
-        allCharacters: [...state.allCharacters, payload],
-      }; */
     case ADD_FAV:
       return { ...state, myFavorites: payload, allCharacters: payload };
-    /* case REMOVE_FAV:
-      let copy = state.myFavorites.filter((character) => {
-        return character.id !== parseInt(payload);
-      });
-      return {
-        ...state,
-        myFavorites: copy,
-        allCharacters: copy,
-      }; */
-    case REMOVE_FAV:
-      return { ...state, myFavorites: payload };
+      case REMOVE_FAV:
+        return {
+          ...state,
+          myFavorites: state.myFavorites.filter((fav) => fav.id !== payload), // Cambia payload.id a payload
+        };
     case FILTER:
       let copy2 = [...state.allCharacters];
       let genderFilter = copy2.filter((character) => {
